@@ -9,18 +9,18 @@ const test1 = """+3
 """
 
 proc dostuff(file: seq[string]) =
-  var freq = 0
-  var fSet = initSet[int]()
-  var p1Res = 0
-  var p1found = false
-  var i = 0  
+  var
+    freq = 0
+    fSet = initSet[int]()
+    p1Res = 0
+    p1found = false
+    i = 0  
   while true:
     let l = file[i]
     if l.len > 0:
-      let f = l.strip(chars = Whitespace).parseInt
+      let f = l.parseInt
       freq += f
       if freq in fSet:
-        echo "Found f ", freq
         break
       else:
         fSet.incl freq
