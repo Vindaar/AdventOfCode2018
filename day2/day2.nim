@@ -46,32 +46,29 @@ proc dostuff1(file: seq[string]): int =
   for x, y in restab:
     result *= y
 
-  echo result
-
 proc dostuff2(file: seq[string]): string =
 
-  var llen = file[0].len
-  while true:
-    for xl in file:
-      for yl in file:
-        var diff = ""
-        var wrong = 0
-        for i in 0 ..< llen:
-          if xl[i] == yl[i]:
-            diff.add xl[i]
-          else:
-            inc wrong
-            if wrong > 1:
-              break
-        if wrong == 1:
-          return diff
+  let llen = file[0].len
+  for xl in file:
+    for yl in file:
+      var diff = ""
+      var wrong = 0
+      for i in 0 ..< llen:
+        if xl[i] == yl[i]:
+          diff.add xl[i]
+        else:
+          inc wrong
+          if wrong > 1:
+            break
+      if wrong == 1:
+        return diff
 
 
 proc main =
   let file = readFile("day2.txt").splitLines.filterIt(it.len > 0)
 
-  discard test1.splitLines.dostuff1
-  discard file.dostuff1
+  echo test1.splitLines.dostuff1
+  echo file.dostuff1
 
   echo test2.splitLines.filterIt(it.len > 0).dostuff2
   echo file.dostuff2
