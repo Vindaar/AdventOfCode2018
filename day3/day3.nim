@@ -24,7 +24,6 @@ proc getRectangles(file: seq[string]): seq[Rectangle] =
     y: int
     w: int
     h: int
-  var rects: seq[Rectangle]
   for l in file:
     if scanf(l, "#$i @ $i,$i: $ix$i", id, x, y, w, h):
       result.add Rectangle(id: id, x: x, y: y, width: w, height: h)
