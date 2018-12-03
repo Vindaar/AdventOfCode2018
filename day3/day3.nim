@@ -49,32 +49,28 @@ proc dostuff1(ftab: Table[(int, int), int]): int =
     if v > 1:
       inc result
 
-proc dostuff2(rects: seq[Rectangle]): int =
+proc dostuff2(rects: seq[Rectangle], ftab: Table[(int, int), int]): int =
   for r in rects:
-    var posSet = initSet[(int, int)]()
-    for xi, yi in positions(r):
-      posSet.incl (xi, yi)
     var unique = true
-    for rb in rects:
-      if rb != r:
-        var skipRect = false
-        for xi, yi in positions(rb):
-          if (xi, yi) in posSet:
-            skipRect = true
-            break
-        if skipRect:
-          unique = false
-          break
+    for xi, yi in positions(r):
+      if ftab[(xi, yi)] > 1:
+        unique = false
+        break
     if unique:
       result = r.id
 
 proc main =
   let file = readFile("day3.txt").strip.splitLines
 
-  echo file.getRectangles.getFtab.dostuff1
+  let rects = file.getRectangles
+  let ftab = rects.getFtab
+  echo ftab.dostuff1
 
-  echo test2.strip.splitLines.getRectangles.dostuff2
-  echo file.getRectangles.dostuff2
+  let rectTest2 = test2.strip.splitLines.getRectangles
+  let ftabTest2 = rectTest2.getFtab
+  echo rectTest2.dostuff2(ftabTest2)
+  echo dostuff2(rects, ftab)
+
 
 when isMainModule:
   main()
