@@ -1,19 +1,10 @@
 import strutils, sequtils, sugar, os, sets, tables, strscans, times, algorithm, typetraits, seqmath
 
-const test1 = """
-"""
-
-const test2 = """
-"""
 const timeStr = "yyyy-MM-dd hh:mm"
 
 type
   GuardKind = enum
     gkWake, gkSleep, gkStart
-
-  Sleep = object
-    start: int
-    stop: int
 
   Guard = object
     shifts: int
