@@ -41,7 +41,6 @@ proc parseNodes(data: string): Node =
   result = parseNode(cmds, i)
 
 proc calcRootValue(n: Node): int =
-  echo "in calc root ", n.metadata
   for m in n.metadata:
     if m <= n.children.len:
       result += n.children[m - 1].calcRootValue
